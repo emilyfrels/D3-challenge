@@ -94,15 +94,16 @@ d3.csv("./assets/data/data.csv").then(function(stateData) {
         .call(leftAxis);
 
     // create circles for scatter plot
-    chartGroup.selectAll("circle")
+    chartGroup.selectAll("stateCircle")
         .data(stateData)
         .enter()
         .append("circle")
         .classed("scatter", true)
         .attr("cx", d => xLinearScale(d.poverty))
         .attr("cy", d => yLinearScale(d.healthcare))
-        .attr("r", "15")
-        .attr("fill", "light blue");
+        .attr("r", "20")
+        .attr("fill", "#89bdd3");
+        
 
 });
 
