@@ -18,7 +18,7 @@ console.log(`SVG Width: ${svgWidth}`);
 var margin = {
     top: 50,
     bottom: 50,
-    left: 50,
+    left: 30,
     right: 50
 };
 
@@ -49,32 +49,36 @@ d3.csv("./assets/data/data.csv").then(function(stateData) {
 
     // cast numeric values to numbers for each piece of stateData
     stateData.forEach(function(data) {
-        stateData.poverty = +stateData.poverty;
-        stateData.povertyMoe = +stateData.povertyMoe;
-        stateData.age = +stateData.age;
-        stateData.ageMoe = +stateData.ageMoe;
-        stateData.income = +stateData.income;
-        stateData.incomeMoe = +stateData.incomeMoe;
-        stateData.healthcare = +stateData.healthcare;
-        stateData.healthcareLow = +stateData.healthcareLow;
-        stateData.healthcareHigh = +stateData.healthcareHigh;
-        stateData.obesity = +stateData.obesity;
-        stateData.obesityLow = +stateData.obesityLow;
-        stateData.obesityHigh = +stateData.obesityHigh;
-        stateData.smokes = +stateData.smokes;
-        stateData.smokesLow = +stateData.smokesLow;
-        stateData.smokesHigh = +stateData.smokesHigh;
+        data.poverty = +data.poverty;
+        data.povertyMoe = +data.povertyMoe;
+        data.age = +data.age;
+        data.ageMoe = +data.ageMoe;
+        data.income = +data.income;
+        data.incomeMoe = +data.incomeMoe;
+        data.healthcare = +data.healthcare;
+        data.healthcareLow = +data.healthcareLow;
+        data.healthcareHigh = +data.healthcareHigh;
+        data.obesity = +data.obesity;
+        data.obesityLow = +data.obesityLow;
+        data.obesityHigh = +data.obesityHigh;
+        data.smokes = +data.smokes;
+        data.smokesLow = +data.smokesLow;
+        data.smokesHigh = +data.smokesHigh;
     });
 
     // scale x to chart width
     var xLinearScale = d3.scaleLinear()
         .range([0, chartWidth])
-        .domain([0, d3.max(stateData, d => d.poverty)]);
+        .domain([d3.min(stateData, d => d.poverty)-2, d3.max(stateData, d => d.poverty)]);
+        console.log("Poverty Max: ", d3.max(stateData, d => d.poverty));
+
+
 
     // scale y to chart height
     var yLinearScale = d3.scaleLinear()
         .range([chartHeight, 0])
-        .domain([0, d3.max(stateData, d => d.healthcare)]);
+        .domain([d3.min(stateData, d => d.healthcare) -2, d3.max(stateData, d => d.healthcare)]);
+        console.log("Healthcare Max: ", d3.max(stateData, d => d.healthcare));
 
     // create axes
     var bottomAxis = d3.axisBottom(xLinearScale);
@@ -89,16 +93,16 @@ d3.csv("./assets/data/data.csv").then(function(stateData) {
     chartGroup.append("g")
         .call(leftAxis);
 
-    // // create circles for scatter plot
-    // var circlesGroup = chartGroup.selectAll("circle")
-    //     .data(stateData)
-    //     .enter()
-    //     .append("circle")
-    //     .attr("cx", d => xLinearScale(d[poverty]))
-    //     .attr("cy", d => yLinearScale(d.healthcare))
-    //     .attr("r", 15)
-    //     .attr("fill", "light blue")
-    //     .attr("opacity", "0.5");
+    // create circles for scatter plot
+    chartGroup.selectAll("circle")
+        .data(stateData)
+        .enter()
+        .append("circle")
+        .classed("scatter", true)
+        .attr("cx", d => xLinearScale(d.poverty))
+        .attr("cy", d => yLinearScale(d.healthcare))
+        .attr("r", "15")
+        .attr("fill", "light blue");
 
 });
 
