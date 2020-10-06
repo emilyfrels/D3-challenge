@@ -21,7 +21,7 @@ console.log(`SVG Width: ${svgWidth}`);
 var margin = {
     top: 50,
     bottom: 50,
-    left: 30,
+    left: 50,
     right: 50
 };
 
@@ -96,6 +96,21 @@ d3.csv("./assets/data/data.csv").then(function(stateData) {
     chartGroup.append("g")
         .call(leftAxis);
 
+    // create x axis label
+    chartGroup.append("text")
+        .attr("transform", `translate(${chartWidth / 2}, ${chartHeight + margin.top -10})`)
+        .classed("aText", true)
+        .text("In Poverty (%)");
+
+    // create y axis label
+    chartGroup.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left)
+        .attr("x", 0 - (chartHeight / 2))
+        .attr("dy", "1em")
+        .classed("aText", true)
+        .text("Lacks Healthcare (%)");
+
     // create circles for scatter plot
     chartGroup.selectAll("stateCircle")
         .data(stateData)
@@ -104,7 +119,13 @@ d3.csv("./assets/data/data.csv").then(function(stateData) {
         .classed("stateCircle", true)
         .attr("cx", d => xLinearScale(d.poverty))
         .attr("cy", d => yLinearScale(d.healthcare))
-        .attr("r", "20");      
+        .attr("r", "20");
+        
+    chartGroup.selectAll("text")
+        .data(stateData)
+        .enter()
+        .append("text")
+        .classed("stateText", true)
 
 });
 
