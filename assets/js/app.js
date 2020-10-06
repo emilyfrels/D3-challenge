@@ -7,9 +7,12 @@ console.log("This is app.js");
 //-------------------------------------------------------//
 
 
-// define SVG area dimensions
-var svgHeight = window.innerHeight;
-var svgWidth = window.innerWidth;
+// // define SVG area dimensions
+// var svgHeight = window.innerHeight;
+// var svgWidth = window.innerWidth;
+
+var svgHeight = 600;
+var svgWidth = 900;
 
 console.log(`SVG Height: ${svgHeight}`);
 console.log(`SVG Width: ${svgWidth}`);
@@ -98,12 +101,10 @@ d3.csv("./assets/data/data.csv").then(function(stateData) {
         .data(stateData)
         .enter()
         .append("circle")
-        .classed("scatter", true)
+        .classed("stateCircle", true)
         .attr("cx", d => xLinearScale(d.poverty))
         .attr("cy", d => yLinearScale(d.healthcare))
-        .attr("r", "20")
-        .attr("fill", "#89bdd3");
-        
+        .attr("r", "20");      
 
 });
 
