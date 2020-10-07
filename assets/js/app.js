@@ -72,7 +72,7 @@ d3.csv("./assets/data/data.csv").then(function(stateData) {
     // scale x to chart width
     var xLinearScale = d3.scaleLinear()
         .range([0, chartWidth])
-        .domain([d3.min(stateData, d => d.poverty)-2, d3.max(stateData, d => d.poverty)]);
+        .domain([d3.min(stateData, d => d.poverty)-2, d3.max(stateData, d => d.poverty)+2]);
         console.log("Poverty Max: ", d3.max(stateData, d => d.poverty));
 
 
@@ -80,7 +80,7 @@ d3.csv("./assets/data/data.csv").then(function(stateData) {
     // scale y to chart height
     var yLinearScale = d3.scaleLinear()
         .range([chartHeight, 0])
-        .domain([d3.min(stateData, d => d.healthcare) -2, d3.max(stateData, d => d.healthcare)]);
+        .domain([d3.min(stateData, d => d.healthcare) -2, d3.max(stateData, d => d.healthcare)+2]);
         console.log("Healthcare Max: ", d3.max(stateData, d => d.healthcare));
 
     // create axes
