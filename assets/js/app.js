@@ -43,6 +43,47 @@ var svg = d3.select("#scatter")
 var chartGroup = svg.append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
+// // Set initial parameters***
+// var chosenXAxis = "poverty_healthcare";
+
+// // function to update x-scale var upon x-axis label click ***
+// function xScale(stateData, chosenXAxis) {
+
+//     // create scales
+//     var xLinearScale = d3.scaleLinear()
+//         .domain([d3.min(stateData, d => d[chosenXAxis]) * 0.8,
+//             d3.max(stateData, d => d[chosenXAxis]) * 1.2
+//         ])
+//         .range([0, chartWidth]);
+
+//         return xLinearScale;
+// }
+
+// // function used for updating x-axis var upon x-axis label click ***
+// function renderAxes(newXScale, xAxis) {
+
+//     // define bottomAxis variable for the selected x-axis label
+//     var bottomAxis = d3.axisBottom(newXScale);
+
+//     // transition the x-axis once x-axis label is selected
+//     xAxis.transition()
+//         .duration(1000)
+//         .call(bottomAxis);
+
+//     return xAxis;
+// }
+
+// //  function to update circles group ***
+// function renderCircles(circlesGroup, newXScale, chosenXAxis) {
+
+//     // define transtion for circles
+//     circlesGroup.transition()
+//         .duration(1000)
+//         .attr("cx", d => newXScale(d[chosenXAxis]));
+
+//     return circlesGroup;
+// }
+
 
 // pull in data from data.csv
 d3.csv("./assets/data/data.csv").then(function(stateData) {
