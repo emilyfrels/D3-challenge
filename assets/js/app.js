@@ -119,19 +119,17 @@ d3.csv("./assets/data/data.csv").then(function(stateData) {
         .classed("stateCircle", true)
         .attr("cx", d => xLinearScale(d.poverty))
         .attr("cy", d => yLinearScale(d.healthcare))
-        .attr("r", "20")
+        .attr("r", "15")
         
     // create labels for state abbreviations for scatterplot
-    chartGroup.selectAll("text")
+    chartGroup.selectAll(".label")
         .data(stateData)
         .enter()
         .append("text")
         .classed("stateText", true)
         .attr("x", d => xLinearScale(d.poverty))
-        .attr("y", d => yLinearScale(d.healthcare)+7)
+        .attr("y", d => yLinearScale(d.healthcare)+5)
         .text(d => d.abbr);
-
-
 });
 
 
