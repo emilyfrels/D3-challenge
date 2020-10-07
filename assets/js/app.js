@@ -11,8 +11,8 @@ console.log("This is app.js");
 // var svgHeight = window.innerHeight;
 // var svgWidth = window.innerWidth;
 
-var svgHeight = 600;
-var svgWidth = 900;
+var svgHeight = 500;
+var svgWidth = 800;
 
 console.log(`SVG Height: ${svgHeight}`);
 console.log(`SVG Width: ${svgWidth}`);
@@ -119,13 +119,18 @@ d3.csv("./assets/data/data.csv").then(function(stateData) {
         .classed("stateCircle", true)
         .attr("cx", d => xLinearScale(d.poverty))
         .attr("cy", d => yLinearScale(d.healthcare))
-        .attr("r", "20");
+        .attr("r", "20")
         
+    // create labels for state abbreviations for scatterplot
     chartGroup.selectAll("text")
         .data(stateData)
         .enter()
         .append("text")
         .classed("stateText", true)
+        .attr("x", d => xLinearScale(d.poverty))
+        .attr("y", d => yLinearScale(d.healthcare)+7)
+        .text(d => d.abbr);
+
 
 });
 
