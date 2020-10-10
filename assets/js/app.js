@@ -160,7 +160,7 @@ d3.csv("./assets/data/data.csv").then(function(stateData) {
         .classed("stateCircle", true)
         .attr("cx", d => xLinearScale(d.poverty))
         .attr("cy", d => yLinearScale(d.healthcare))
-        .attr("r", "15")
+        .attr("r", "12")
         
     // create labels for state abbreviations for scatterplot
     chartGroup.selectAll(".label")
